@@ -1,0 +1,28 @@
+# Rust
+/target
+**/target
+
+# Node
+**/node_modules
+**/.next
+**/out
+**/*.tsbuildinfo
+
+# Python
+**/venv/
+**/__pycache__/
+portfoliolab/
+
+# Unrelated nested projects (not part of this workspace)
+tinkoff-invest-etf-balancer-bot/
+portfolio-optimizer-landing/
+
+# Front-end app — its own git repo, not yet a submodule
+portfolio-optimizer/
+
+# OS / editor
+.DS_Store
+**/.DS_Store
+
+# Large binaries
+*.pdf

@@ -1,0 +1,34 @@
+[package]
+name = "portfolio-backend"
+version = "0.2.0"
+description = "HTTP server exposing all portfolio optimization algorithms"
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "portfolio-server"
+path = "src/main.rs"
+
+[[bin]]
+name = "hrp-bench"
+path = "src/bench.rs"
+
+[dependencies]
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.6", features = ["cors"] }
+
+portfolio-hrp = { path = "../../algos/portfolio-hrp" }
+portfolio-herc = { path = "../../algos/portfolio-herc" }
+portfolio-ghrp = { path = "../../algos/portfolio-ghrp" }
+portfolio-mhrp = { path = "../../algos/portfolio-mhrp" }
+portfolio-mvo = { path = "../../algos/portfolio-mvo" }
+portfolio-black-litterman = { path = "../../algos/portfolio-black-litterman" }
+portfolio-nco = { path = "../../algos/portfolio-nco" }
+portfolio-entropy-pooling = { path = "../../algos/portfolio-entropy-pooling" }
+portfolio-olps = { path = "../../algos/portfolio-olps" }
+portfolio-rba = { path = "../../algos/portfolio-rba" }
+portfolio-tic = { path = "../../algos/portfolio-tic" }

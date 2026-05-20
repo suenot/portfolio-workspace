@@ -1,0 +1,24 @@
+"use client";
+
+import katex from "katex";
+
+interface MathProps {
+  tex: string;
+  display?: boolean;
+  className?: string;
+}
+
+export default function Math({ tex, display = false, className = "" }: MathProps) {
+  const html = katex.renderToString(tex, {
+    displayMode: display,
+    throwOnError: false,
+    trust: true,
+  });
+
+  return (
+    <span
+      className={className}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}

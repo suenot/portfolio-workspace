@@ -1,0 +1,36 @@
+[submodule "algos/portfolio-hrp"]
+	path = algos/portfolio-hrp
+	url = git@github.com:suenot/portfolio-hrp.git
+[submodule "algos/portfolio-herc"]
+	path = algos/portfolio-herc
+	url = git@github.com:suenot/portfolio-herc.git
+[submodule "algos/portfolio-ghrp"]
+	path = algos/portfolio-ghrp
+	url = git@github.com:suenot/portfolio-ghrp.git
+[submodule "algos/portfolio-mhrp"]
+	path = algos/portfolio-mhrp
+	url = git@github.com:suenot/portfolio-mhrp.git
+[submodule "algos/portfolio-mvo"]
+	path = algos/portfolio-mvo
+	url = git@github.com:suenot/portfolio-mvo.git
+[submodule "algos/portfolio-black-litterman"]
+	path = algos/portfolio-black-litterman
+	url = git@github.com:suenot/portfolio-black-litterman.git
+[submodule "algos/portfolio-nco"]
+	path = algos/portfolio-nco
+	url = git@github.com:suenot/portfolio-nco.git
+[submodule "algos/portfolio-entropy-pooling"]
+	path = algos/portfolio-entropy-pooling
+	url = git@github.com:suenot/portfolio-entropy-pooling.git
+[submodule "algos/portfolio-olps"]
+	path = algos/portfolio-olps
+	url = git@github.com:suenot/portfolio-olps.git
+[submodule "algos/portfolio-rba"]
+	path = algos/portfolio-rba
+	url = git@github.com:suenot/portfolio-rba.git
+[submodule "algos/portfolio-tic"]
+	path = algos/portfolio-tic
+	url = git@github.com:suenot/portfolio-tic.git
+[submodule "mean-variance-optimization"]
+	path = mean-variance-optimization
+	url = git@github.com:suenot/portfolio-management-algos.git

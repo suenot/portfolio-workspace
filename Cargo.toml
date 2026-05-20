@@ -1,0 +1,34 @@
+# Portfolio Optimization Workspace
+#
+# Each algorithm lives in its own crate under algos/ — these are git
+# submodules, individually published as github.com/suenot/portfolio-<name>.
+# optimization/backend is the HTTP server that depends on all of them.
+
+[workspace]
+resolver = "2"
+members = [
+    "algos/portfolio-hrp",
+    "algos/portfolio-herc",
+    "algos/portfolio-ghrp",
+    "algos/portfolio-mhrp",
+    "algos/portfolio-mvo",
+    "algos/portfolio-black-litterman",
+    "algos/portfolio-nco",
+    "algos/portfolio-entropy-pooling",
+    "algos/portfolio-olps",
+    "algos/portfolio-rba",
+    "algos/portfolio-tic",
+    "optimization/backend",
+]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+authors = ["suenot"]
+
+[workspace.dependencies]
+nalgebra = "0.33"
+
+[profile.release]
+opt-level = 3
+lto = true
