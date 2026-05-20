@@ -32,3 +32,4 @@ portfolio-entropy-pooling = { path = "../../algos/portfolio-entropy-pooling" }
 portfolio-olps = { path = "../../algos/portfolio-olps" }
 portfolio-rba = { path = "../../algos/portfolio-rba" }
 portfolio-tic = { path = "../../algos/portfolio-tic" }
+portfolio-pipeline = { path = "../../algos/portfolio-pipeline" }

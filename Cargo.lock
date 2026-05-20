@@ -433,6 +433,7 @@ dependencies = [
  "portfolio-mvo",
  "portfolio-nco",
  "portfolio-olps",
+ "portfolio-pipeline",
  "portfolio-rba",
  "portfolio-tic",
  "serde",
@@ -487,6 +488,10 @@ dependencies = [
 
 [[package]]
 name = "portfolio-olps"
+version = "0.1.0"
+
+[[package]]
+name = "portfolio-pipeline"
 version = "0.1.0"
 
 [[package]]

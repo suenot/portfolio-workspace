@@ -18,6 +18,7 @@ members = [
     "algos/portfolio-olps",
     "algos/portfolio-rba",
     "algos/portfolio-tic",
+    "algos/portfolio-pipeline",
     "optimization/backend",
 ]
 

@@ -34,3 +34,6 @@
 [submodule "mean-variance-optimization"]
 	path = mean-variance-optimization
 	url = git@github.com:suenot/portfolio-management-algos.git
+[submodule "algos/portfolio-pipeline"]
+	path = algos/portfolio-pipeline
+	url = git@github.com:suenot/portfolio-pipeline.git

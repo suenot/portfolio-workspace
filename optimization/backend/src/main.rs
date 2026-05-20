@@ -21,6 +21,7 @@ const METHODS: &[(&str, &str)] = &[
     ("olps", "Online Portfolio Selection"),
     ("rba", "Robust Bayesian Allocation"),
     ("tic", "Theory-Implied Correlation"),
+    ("pipeline", "Composite Pipeline (HRP + Long/Short + CVaR)"),
 ];
 
 /// Dispatch a method name to its algorithm crate.
@@ -37,6 +38,7 @@ fn dispatch(method: &str, prices: &[Vec<f64>]) -> Option<Vec<f64>> {
         "olps" => portfolio_olps::optimize(prices),
         "rba" => portfolio_rba::optimize(prices),
         "tic" => portfolio_tic::optimize(prices),
+        "pipeline" => portfolio_pipeline::optimize(prices),
         _ => return None,
     };
     Some(weights)
