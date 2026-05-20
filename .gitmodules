@@ -37,3 +37,6 @@
 [submodule "algos/portfolio-pipeline"]
 	path = algos/portfolio-pipeline
 	url = git@github.com:suenot/portfolio-pipeline.git
+[submodule "portfolio-optimizer"]
+	path = portfolio-optimizer
+	url = git@github.com:suenot/portfolio-optimizer.git

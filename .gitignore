@@ -17,9 +17,6 @@ portfoliolab/
 tinkoff-invest-etf-balancer-bot/
 portfolio-optimizer-landing/
 
-# Front-end app — its own git repo, not yet a submodule
-portfolio-optimizer/
-
 # OS / editor
 .DS_Store
 **/.DS_Store
