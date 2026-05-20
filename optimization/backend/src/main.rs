@@ -110,6 +110,39 @@ async fn optimize(Json(req): Json<OptimizeRequest>) -> Json<ApiResult> {
     }))
 }
 
+#[derive(Deserialize)]
+struct BenchmarkRequest {
+    prices: HashMap<String, Vec<f64>>,
+}
+
+#[derive(Serialize)]
+struct BenchmarkEntry {
+    method: &'static str,
+    name: &'static str,
+    weights: HashMap<String, f64>,
+    elapsed_us: u64,
+}
+
+/// Run every algorithm on the same prices — powers the comparison table.
+async fn benchmark(Json(req): Json<BenchmarkRequest>) -> Json<serde_json::Value> {
+    let symbols: Vec<String> = req.prices.keys().cloned().collect();
+    if symbols.len() < 2 {
+        return Json(serde_json::json!({ "error": "need at least 2 assets" }));
+    }
+    let price_vecs: Vec<Vec<f64>> = symbols.iter().map(|s| req.prices[s].clone()).collect();
+
+    let mut results = Vec::with_capacity(METHODS.len());
+    for &(id, name) in METHODS {
+        let start = std::time::Instant::now();
+        let weights = dispatch(id, &price_vecs).unwrap_or_default();
+        let elapsed_us = start.elapsed().as_micros() as u64;
+        let weight_map: HashMap<String, f64> =
+            symbols.iter().cloned().zip(weights.iter().copied()).collect();
+        results.push(BenchmarkEntry { method: id, name, weights: weight_map, elapsed_us });
+    }
+    Json(serde_json::json!({ "results": results }))
+}
+
 #[derive(Serialize)]
 struct MethodInfo {
     id: &'static str,
@@ -138,6 +171,7 @@ async fn main() {
         .route("/health", get(health))
         .route("/api/methods", get(methods))
         .route("/api/optimize", post(optimize))
+        .route("/api/benchmark", post(benchmark))
         .layer(CorsLayer::permissive());
 
     println!("Portfolio Backend (Rust) — {} algorithms — listening on {}", METHODS.len(), addr);

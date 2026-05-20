@@ -55,3 +55,5 @@ git submodule update --init --recursive
 - `GET  /health` — liveness
 - `GET  /api/methods` — list available algorithms
 - `POST /api/optimize` — body `{ "prices": { "BTC": [...], ... }, "method": "hrp" }`
+- `POST /api/benchmark` — run every algorithm on the same prices (powers the
+  frontend comparison table); body `{ "prices": { ... } }`
