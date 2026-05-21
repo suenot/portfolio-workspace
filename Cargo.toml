@@ -32,4 +32,4 @@ nalgebra = "0.33"
 
 [profile.release]
 opt-level = 3
-lto = true
+lto = "thin"
