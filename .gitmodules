@@ -37,3 +37,24 @@
 [submodule "portfolio-optimizer"]
 	path = portfolio-optimizer
 	url = git@github.com:suenot/portfolio-optimizer.git
+[submodule "benchmarks/c"]
+	path = benchmarks/c
+	url = git@github.com:suenot/hrp-bench-c.git
+[submodule "benchmarks/cpp"]
+	path = benchmarks/cpp
+	url = git@github.com:suenot/hrp-bench-cpp.git
+[submodule "benchmarks/zig"]
+	path = benchmarks/zig
+	url = git@github.com:suenot/hrp-bench-zig.git
+[submodule "benchmarks/rust"]
+	path = benchmarks/rust
+	url = git@github.com:suenot/hrp-bench-rust.git
+[submodule "benchmarks/python"]
+	path = benchmarks/python
+	url = git@github.com:suenot/hrp-bench-python.git
+[submodule "benchmarks/node"]
+	path = benchmarks/node
+	url = git@github.com:suenot/hrp-bench-node.git
+[submodule "benchmarks/bun"]
+	path = benchmarks/bun
+	url = git@github.com:suenot/hrp-bench-bun.git
