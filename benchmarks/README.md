@@ -21,8 +21,8 @@ Five timed stages of the HRP pipeline on `N` assets × 365 daily observations:
 | Stage | Complexity |
 |---|---|
 | Log returns | O(N·T) |
-| Covariance | O(N²·T) |
-| Average linkage | **O(N³)** in the hand-rolled versions ← dominates |
+| Covariance | **O(N²·T)** ← dominates |
+| Average linkage | O(N²) (NN-chain, Müllner 2011) |
 | Quasi-diagonalization | O(N²) |
 | Recursive-bisection weights | O(N log N) |
 
@@ -30,16 +30,18 @@ Synthetic price generation, correlation and distance are computed but **not** ti
 
 ## Methodology & fairness
 
-- **Six of the seven implementations (C, C++, Zig, Rust, Node, Bun) run the exact
-  same hand-rolled algorithm**, including a naive `O(N³)` average linkage. That makes
-  them a clean *language* comparison — same operations, same memory layout, same
-  data. Prices and resulting weights are bit-identical (verified: at `N=10` every
-  implementation yields `w0=0.214035016516, w1=0.138665098707, w2=0.026131011048`).
+- **All seven implementations run the same algorithm**, including an `O(N²)`
+  nearest-neighbor-chain average linkage (Müllner 2011 — the method behind SciPy's
+  `linkage(method='average')`). Six hand-roll every stage (C, C++, Zig, Rust, Node,
+  Bun); Python delegates to `numpy`/`scipy`. That makes the six a clean *language*
+  comparison — same operations, same memory layout, same data. Prices and resulting
+  weights are bit-identical (verified: at `N=10` every implementation yields
+  `w0=0.214035016516, w1=0.138665098707, w2=0.026131011048`).
 - **Python is the odd one out, on purpose.** It uses `numpy` + `scipy.cluster.hierarchy`
-  — i.e. how Python is actually written. `scipy`'s `linkage` is a compiled `O(N²)`
-  nearest-neighbor-chain algorithm and covariance is BLAS-backed, so Python's numbers
-  reflect *library quality*, not the language. It is therefore not comparable on the
-  linkage column — and it wins, which is the point.
+  — i.e. how Python is actually written. The clustering algorithm is the *same* O(N²)
+  NN-chain, but the now-dominant covariance stage is BLAS-backed and vectorized, so
+  Python's numbers reflect *library quality* on that stage, not the language — and it
+  wins, which is the point.
 
 ## Indicative results
 
@@ -48,19 +50,23 @@ with `./run_all.sh`. Microbenchmark — expect ±10–20% between runs.
 
 | Language | TOTAL @ N=1000 |
 |---|---:|
-| C++ | ~256 ms |
-| C | ~260 ms |
-| Zig | ~265 ms |
-| Bun | ~351 ms |
-| Rust | ~398 ms |
-| Node.js | ~806 ms |
+| C++ | ~127 ms |
+| C | ~130 ms |
+| Rust | ~134 ms |
+| Bun | ~170 ms |
+| Node.js | ~423 ms |
 | Python (numpy/scipy) | **~23 ms** |
 
-Takeaways: among the hand-rolled `O(N³)` versions the compiled languages cluster
-tightly (C ≈ C++ ≈ Zig, Rust within ~1.5×), Bun beats Node on the same JS, and the
-idiomatic `numpy`/`scipy` Python is an order of magnitude faster than all of them —
-because a better *algorithm and library* beats raw language speed. For realistic
-portfolios (dozens of assets) every version finishes in single-digit milliseconds.
+(Zig is compiled and tracks C/C++; its toolchain wouldn't link in this particular
+run, so it is omitted from the snapshot above.)
+
+Takeaways: with the `O(N²)` NN-chain linkage the dominant stage is now the
+covariance matrix `O(N²·T)`, not clustering. The compiled languages cluster tightly
+(C ≈ C++ ≈ Rust), Bun beats Node on the same JS, and the idiomatic `numpy`/`scipy`
+Python is an order of magnitude faster than all of them — not because of a better
+clustering algorithm (everyone shares the same NN-chain now) but because its
+covariance is BLAS-backed. For realistic portfolios (dozens of assets) every version
+finishes in single-digit milliseconds.
 
 ## Run
 
